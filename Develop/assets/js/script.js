@@ -1,10 +1,17 @@
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
-
+//Add task aka show modal pop up
 const dialog = document.getElementById("add-task");
-dialog.showModal()
 
+function showTaskDialog() {
+    dialog.showModal()
+}
+
+// Function to close modal
+function closeTaskDiolog() {
+    dialog.closest()
+}
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
 
