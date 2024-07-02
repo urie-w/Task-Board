@@ -50,12 +50,56 @@ return taskCard;
 // Todo: create a function to render the task list and make cards draggable
 function renderList() {
     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    const todoList = $('#todo-cards');
+    todoList.empty();
+
+    const completedList = $('#completed-cards');
+    completedList.empty();
+
+    const inProgressList = $('#in-progress-cards');
+    inProgressList.empty();
+
+    const incompleteList = $('#incomplete-cards');
+    incompleteList.empty();
 }
+
+// Create project card for each list
+for (let task of savedTasks) {
+    if (task.status === 'todo') {
+        todoList.append(createTaskCard(task));
+    } else if (task.status === 'in-progress') {
+        inProgressList.append(createTaskCard(task));
+    } else if (task.status === 'complete') {
+        completedList.append(createTaskCard(task));
+    }  else if (task.status === 'incomplete') {
+            incompleteList.append(createTaskCard(task));
+        }
+    }
 
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
+ event.preventDefault();
 
+ const title = $('#task-title').val();
+ const description = $('#task-description').val();
+ const datepicker = $('#task-due-date').val();
+
+ const data = {
+     title,
+     description,
+     dueDate: datepicker,
+     status: 'incomplete',
+     id: newId
+ };
+
+ const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+ savedTasks.push(data);
+
+ localStorage.setItem("tasks", JSON.stringify(savedTasks));
+
+ window.location.reload();
 }
 
 // Todo: create a function to handle deleting a task
