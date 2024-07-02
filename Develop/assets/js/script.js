@@ -28,7 +28,7 @@ const cardBody = $('<div>').addClass('card-body');
 const cardDescription = $('<p>').addClass('card-text').text(task.description);
 const cardDueDate = $('<p>').addClass('card-text').text(task.dueDate);
 const cardDeleteBtn = $('<button>').addClass('btn btn-danger btn-sm float-right').attr('data-id', task.id).text('Delete');
-}
+
 if (task.dueDate && task.status !== 'complete') {
     const now = dayjs();
     const dueDate = dayjs(task.dueDate, "DD/MM/YYYY");
@@ -41,9 +41,15 @@ if (task.dueDate && task.status !== 'complete') {
     }
 }
 
+cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
+taskCard.append(cardHeader, cardBody);
+
+return taskCard;
+}
+
 // Todo: create a function to render the task list and make cards draggable
-function renderTaskList() {
-    const savedTasks = JSON.parse(localStorage.getItem("tasks")); || [];
+function renderList() {
+    const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 }
 
 
