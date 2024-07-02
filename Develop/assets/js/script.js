@@ -22,7 +22,23 @@ function closeTaskDialog() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
+const taskCard = $('<div>').addClass('card project-card draggable my-2').attr('data-id', task.id);
+const cardHeader = $('<div>').addClass('card-header h4').text(task.title);
+const cardBody = $('<div>').addClass('card-body');
+const cardDescription = $('<p>').addClass('card-text').text(task.description);
+const cardDueDate = $('<p>').addClass('card-text').text(task.dueDate);
+const cardDeleteBtn = $('<button>').addClass('btn btn-danger btn-sm float-right').attr('data-id', task.id).text('Delete');
+}
+if (task.dueDate && task.status !== 'complete') {
+    const now = dayjs();
+    const dueDate = dayjs(task.dueDate, "DD/MM/YYYY");
 
+    if (now.isSame(dueDate, 'day')) {
+        taskCard.addClass('text-success');
+    } else if (now.isAfter(dueDate)) {
+        taskCard.addClass('text-danger');
+        cardDeleteBtn.addClass('boarder-light');
+    }
 }
 
 // Todo: create a function to render the task list and make cards draggable
@@ -30,9 +46,6 @@ function renderTaskList() {
     const savedTasks = JSON.parse(localStorage.getItem("tasks")); || [];
 }
 
-function renderTaskList() {
-
-}
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
