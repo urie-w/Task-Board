@@ -4,7 +4,7 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // Todo: create a function to generate a unique task id
 function generateId() {
-    let taskId = JSON.parse(localStorage.generateId('newId'));
+    let taskId = JSON.parse(localStorage.generateId('nextId'));
 }
 
 
@@ -50,7 +50,6 @@ return taskCard;
 // Todo: create a function to render the task list and make cards draggable
 function renderList() {
     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
     const todoList = $('#todo-cards');
     todoList.empty();
 
@@ -76,6 +75,17 @@ for (let task of savedTasks) {
             incompleteList.append(createTaskCard(task));
         }
     }
+
+    // Make cards draggable
+    $('.draggable').sortable({
+        connectWith: '.draggable',
+        dropOnEmpty: true,
+        stop: function(event, ui) {
+            const droppedTask = $(ui.item);
+            const droppedTaskStatus = droppedTask.parent().attr('id');
+            const droppedTaskId = droppedTask.attr('data-id');
+        }
+    });
 
 
 // Todo: create a function to handle adding a new task
