@@ -117,7 +117,11 @@ function handleAddTask(event){
  window.location.reload();
 }
 // Todo: create a function to handle deleting a task
-function handleDeleteTask(event){
+function handleDeleteTask(event) {
+    event.preventDefault();
+    taskId = $(this).attr('data-id');
+    console.log(taskId);
+    taskList= taskList.filter(task => task.id!== taskId);
 
 }
 
