@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
+
   <link rel="stylesheet" href="./Develop/assets/script.js" />
   <title>Task Board</title>
 </head>
@@ -22,7 +23,7 @@
   </header>
   <div class="container">
     <div class="text-center mb-5">
-      <button onclick=showTaskDialog() class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal" data-toggle="modal" data-target="#formModal">Add Task</button>
     </div>
 
     <!-- Todo: Create a modal with a form to add tasks -->
@@ -32,14 +33,14 @@
       <form>
         <div>
           <h5>Title</h5>
-          <input type="title">
+          <input id="input-title" type="text">
           <h5>Due Date</h5>
-          <input type="date">
+          <input id="input-date"  type="date">
           <h5>Description</h5>
-          <input type="description">
+          <input id="input-description"  type="text">
         </div>
         <button onclick=closeTaskDialog()>Cancel</button>
-        <button onclick=openTaskDialog()>Add Task</button>
+        <button onclick=openTaskDialog()>Save Task</button>
       </form>
     </dialog>
 
