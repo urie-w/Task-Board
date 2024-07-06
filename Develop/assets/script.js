@@ -122,12 +122,21 @@ function handleDeleteTask(event) {
     taskId = $(this).attr('data-id');
     console.log(taskId);
     taskList= taskList.filter(task => task.id!== taskId);
-
+localStorage.setItem("tasks", JSON.stringify(taskList));
+renderList();
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
-function handleDrop(event, ui) {
-
+function handleDrop(taskId, newLaneId) {
+    const tasks = document.getElementById(taskId);
+    const newLane = document.getElementById(newLaneId);
+   if (tasks && newLane) {
+//move task to new lane
+        newLane.appendChild(tasks);
+        console.log(newLane);
+   }else {
+       console.error('Task or lane not found');
+   }
 }
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
